@@ -49,6 +49,8 @@ python -m lwa_daynight apply --factor factor_night_to_day.npz \
 `apply` writes a corrected copy (or a selected time slice with
 `--start/--stop`); the input file is never modified. All power planes
 (`XX`, `YY`, `XY_real`, `XY_imag`) are multiplied by the same real factor.
+Corrected files carry `night2day=True` (`False` for other directions) and
+`DAYNIGHT_CORR='night->day'` in their root attributes.
 
 ## Validation (2026-10 data)
 

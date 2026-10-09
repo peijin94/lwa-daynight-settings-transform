@@ -79,8 +79,10 @@ def correct_hdf5(infile: str, outfile: str, factor, planes=PLANES,
                     j0, j1 = int(idx[0]), int(idx[-1]) + 1
                     blk = np.asarray(ds[j0:j1, :], dtype="f4")[idx - j0, :]
                     out[i0:i0 + idx.size, :] = blk * cpow[None, :].astype("f4")
+            fo.attrs["night2day"] = bool(factor.from_state == "night" and factor.to_state == "day")
             fo.attrs["DAYNIGHT_CORR"] = f"{factor.from_state}->{factor.to_state}"
             fo.attrs["DAYNIGHT_FACTOR_NOTE"] = factor.provenance.get("note", "")
     return {"input": infile, "output": outfile, "rows": int(sel.size),
             "t_first": float(t[sel[0]]), "t_last": float(t[sel[-1]]),
+            "night2day": bool(factor.from_state == "night" and factor.to_state == "day"),
             "c_power_min": float(cpow.min()), "c_power_max": float(cpow.max())}

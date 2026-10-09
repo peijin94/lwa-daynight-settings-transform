@@ -56,6 +56,18 @@ def test_apply_time_selection(tmp_path):
         assert f["Observation1/Tuning1/XX"].shape == (3, NCHAN)
 
 
+def test_night2day_flag(tmp_path):
+    inp = make_file(tmp_path / "in.h5")
+    fac_dn = FrequencyFactor(r_volt=np.ones(4096), from_state="day", to_state="night")
+    correct_hdf5(str(inp), str(tmp_path / "o1.h5"), fac_dn)
+    with h5py.File(str(tmp_path / "o1.h5"), "r") as f:
+        assert bool(f.attrs["night2day"]) is False
+    fac_nd = FrequencyFactor(r_volt=np.ones(4096))  # default night->day
+    correct_hdf5(str(inp), str(tmp_path / "o2.h5"), fac_nd)
+    with h5py.File(str(tmp_path / "o2.h5"), "r") as f:
+        assert bool(f.attrs["night2day"]) is True
+
+
 def test_no_overwrite(tmp_path):
     inp = make_file(tmp_path / "in.h5")
     fac = FrequencyFactor(r_volt=np.ones(4096))
