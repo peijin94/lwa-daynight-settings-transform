@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lwa-daynight-settings-transform"
+version = "0.1.0"
+description = "Transform OVRO-LWA beam recordings made under night-time array settings into their day-time-settings equivalent"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Peijin Zhang", email = "pjer1316@icloud.com" }]
+dependencies = ["numpy", "scipy", "h5py"]
+
+[project.scripts]
+lwa-daynight = "lwa_daynight.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["lwa_daynight*"]

@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# notebooks / caches
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+
+# data products
+*.hdf5
+*.h5
+*.npz
+
+# nested Overleaf notes repo (separate remote)
+overleaf-notes/
